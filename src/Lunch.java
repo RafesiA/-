@@ -1,7 +1,5 @@
-import java.util.Scanner;
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 class Menu{
 	File lunchDB = new File("C:\\Temp\\lunchDB.txt");
@@ -28,6 +26,9 @@ class Menu{
 			System.out.println("Critical Error" + e.getMessage());
 		}
 	}
+	void find() {
+		
+	}
 }
 
 
@@ -41,8 +42,8 @@ public class Lunch {
 		System.out.println("골라라");
 		System.out.println("1. Show DB");
 		System.out.print("선택하기: ");
-		
 		Scanner scanner = new Scanner(System.in);
+		
 		int choice = scanner.nextInt();
 		System.out.println("========================");
 		switch(choice){
