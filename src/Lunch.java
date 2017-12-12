@@ -10,21 +10,41 @@ public class Lunch extends JFrame{
 	JTextArea outputArea1, outputArea2, outputArea3, outputArea4;
 	JPanel panel1, panel2, panel3, panel4;
 	JLabel label1, label2, label3, label4;
-	String[] resName = {"순살파닭", "BHC", "신통치킨", "미쳐버린파닭", "팔구치킨"};
-	String[] resName1 = {"피자에땅", "피자알볼로", "59쌀피자", "피자헤븐", "토파토피자"};
-	String[] resName2 = {"족발뱅이", "사또족발"};
-	String[] resName3 = {"만다린", "라이징강", "짬뽕이조아", "궁차이나"};
+	String[] resName = {"선택하세요", "순살파닭", "BHC", "신통치킨", "미쳐버린파닭", "팔구치킨"};
+	String[] resName1 = {"선택하세요", "피자에땅", "피자알볼로", "59쌀피자", "피자헤븐", "토파토피자"};
+	String[] resName2 = {"선택하세요", "족발뱅이", "사또족발"};
+	String[] resName3 = {"선택하세요", "만다린", "라이징강", "짬뽕이조아", "궁차이나"};
+	
+	class MyActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			JComboBox cb = (JComboBox)e.getSource();
+			String menuName = (String)cb.getSelectedItem();
+			if(menuName.equals("순살파닭")) {
+				try {
+					BufferedReader br = new BufferedReader(new FileReader("C:\\Temp\\Menus\\순살파닭.txt"));
+					outputArea1.read(br, "C:\\Temp\\Menus\\순살파닭.txt");
+			} catch(IOException er) {
+				System.out.println(er);}
+			} else {
+				outputArea1.setText("");
+			}
+		}
+	}
 	
 	void userUI() {
+		MyActionListener listener = new MyActionListener();
 		outputArea1 = new JTextArea(10, 30);
 		outputArea2 = new JTextArea(10, 30);
 		outputArea3 = new JTextArea(10, 30);
 		outputArea4 = new JTextArea(10, 30);
-		
 		JComboBox box1 = new JComboBox(resName);
 		JComboBox box2 = new JComboBox(resName1);
 		JComboBox box3 = new JComboBox(resName2);
 		JComboBox box4 = new JComboBox(resName3);
+		box1.addActionListener(listener);
+		box2.addActionListener(listener);
+		box3.addActionListener(listener);
+		box4.addActionListener(listener);
 		panel1 = new JPanel();
 		panel1.setBackground(Color.gray);
 		panel1.add(box1);
@@ -77,6 +97,7 @@ public class Lunch extends JFrame{
 		JMenuItem[] itemTitle = new JMenuItem[3];
 		String[] itemName = {"Select", "About", "Close"};
 	}
+	
 
 
 	public static void main(String[] args) {
