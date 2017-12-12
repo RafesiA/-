@@ -9,12 +9,14 @@ public class Lunch extends JFrame{
 	JTabbedPane jtp = new JTabbedPane();
 	JPanel panel1, panel2, panel3;
 	JLabel label1, label2, label3;
+	String[] resName = {"만다린", "수비드하우스", "치킨집"};
 	
 	
-	
-	public Lunch() {
+	void userUI() {
+		JComboBox box1 = new JComboBox(resName);
 		panel1 = new JPanel();
 		panel1.setBackground(Color.red);
+		panel1.add(box1);
 		panel2 = new JPanel();
 		panel2.setBackground(Color.orange);
 		panel3 = new JPanel();
@@ -28,7 +30,10 @@ public class Lunch extends JFrame{
 		jtp.add("First", panel1);
 		jtp.add("Second", panel2);
 		jtp.add("Third", panel3);
-		
+	}
+	
+	public Lunch() {
+		userUI();
 		frm.add(jtp);
 		frm.setTitle("점심먹자");
 		frm.setSize(500,300);
