@@ -5,6 +5,9 @@ import java.io.*;
 import java.util.*;
 
 public class Lunch extends JFrame{
+	String fileName;
+	File resListFile = new File("C:\\Temp\\Menus\\");
+	String filePath = resListFile.getPath();
 	JFrame frm = new JFrame();
 	JTabbedPane jtp = new JTabbedPane();
 	JTextArea outputArea1, outputArea2, outputArea3, outputArea4;
@@ -20,14 +23,126 @@ public class Lunch extends JFrame{
 			JComboBox cb = (JComboBox)e.getSource();
 			String menuName = (String)cb.getSelectedItem();
 			if(menuName.equals("순살파닭")) {
+				fileName = "\\순살파닭.txt";
 				try {
-					BufferedReader br = new BufferedReader(new FileReader("C:\\Temp\\Menus\\순살파닭.txt"));
-					outputArea1.read(br, "C:\\Temp\\Menus\\순살파닭.txt");
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea1.read(br, resListFile);
 			} catch(IOException er) {
 				System.out.println(er);}
-			} else {
-				outputArea1.setText("");
 			}
+			else if(menuName.equals("BHC")) {
+				fileName = "\\BHC.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea1.read(br, resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}	
+			}
+			else if(menuName.equals("신통치킨")) {
+				fileName = "\\신통치킨.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea1.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("미쳐버린파닭")) {
+				fileName = "\\미쳐버린파닭.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea1.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("팔구치킨")) {
+				fileName = "\\팔구치킨.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea1.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("피자에땅")) {
+				fileName = "\\피자에땅.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea2.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("피자알볼로")) {
+				fileName = "\\피자알볼로.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea2.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("59쌀피자")) {
+				fileName = "\\59쌀피자.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea2.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+
+			else if(menuName.equals("피자헤븐")) {
+				fileName = "\\피자헤븐.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea2.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+
+			else if(menuName.equals("피자헤븐")) {
+				fileName = "\\피자헤븐.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea2.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+
+			else if(menuName.equals("토파토피자")) {
+				fileName = "\\토파토피자.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea2.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("족발뱅이")) {
+				fileName = "\\족발뱅이.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea3.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			else if(menuName.equals("사또족발")) {
+				fileName = "\\사또족발.txt";
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(resListFile + fileName));
+					outputArea3.read((br), resListFile);
+				} catch(IOException er) {
+					System.out.println(er);
+				}
+			}
+			
+			
 		}
 	}
 	
@@ -37,6 +152,11 @@ public class Lunch extends JFrame{
 		outputArea2 = new JTextArea(10, 30);
 		outputArea3 = new JTextArea(10, 30);
 		outputArea4 = new JTextArea(10, 30);
+		outputArea1.setEditable(false);
+		outputArea2.setEditable(false);
+		outputArea3.setEditable(false);
+		outputArea4.setEditable(false);
+		
 		JComboBox box1 = new JComboBox(resName);
 		JComboBox box2 = new JComboBox(resName1);
 		JComboBox box3 = new JComboBox(resName2);
@@ -45,31 +165,37 @@ public class Lunch extends JFrame{
 		box2.addActionListener(listener);
 		box3.addActionListener(listener);
 		box4.addActionListener(listener);
+		
 		panel1 = new JPanel();
 		panel1.setBackground(Color.gray);
 		panel1.add(box1);
 		panel1.add(outputArea1);
+		panel1.add(new JScrollPane(outputArea1));
 		
 		panel2 = new JPanel();
 		panel2.setBackground(Color.gray);
 		panel2.add(box2);
 		panel2.add(outputArea2);
+		panel2.add(new JScrollPane(outputArea2));
 		
 		panel3 = new JPanel();
 		panel3.setBackground(Color.gray);
 		panel3.add(box3);
 		panel3.add(outputArea3);
+		panel3.add(new JScrollPane(outputArea3));
 		
 		
 		panel4 = new JPanel();
 		panel4.setBackground(Color.gray);
 		panel4.add(box4);
 		panel4.add(outputArea4);
+		panel4.add(new JScrollPane(outputArea4));
 		
 		label1 = new JLabel("I'm the First");
 		label2 = new JLabel("I'm Second");
 		label3 = new JLabel("I'm number Three");
 		label4 = new JLabel("wtf");
+		
 		panel1.add(label1);
 		panel2.add(label2);
 		panel3.add(label3);
@@ -84,7 +210,7 @@ public class Lunch extends JFrame{
 		userUI();
 		frm.add(jtp);
 		frm.setTitle("점심먹자");
-		frm.setSize(500,300);
+		frm.setSize(1000,500);
 		frm.setVisible(true);
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -102,5 +228,6 @@ public class Lunch extends JFrame{
 
 	public static void main(String[] args) {
 		new Lunch();
+		
 	}
 }
