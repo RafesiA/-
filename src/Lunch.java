@@ -6,11 +6,11 @@ import java.util.*;
 
 public class Lunch extends JFrame{
 	String fileName;
-	File resListFile = new File("C:\\Temp\\Menus\\");
+	File resListFile = new File("src\\Menus\\");
 	String filePath = resListFile.getPath();
 	JFrame frm = new JFrame();
 	JTabbedPane jtp = new JTabbedPane();
-	
+	ImageIcon icon = new ImageIcon("src\\myImage.jpg");
 	JTextArea outputArea1, outputArea2, outputArea3, outputArea4;
 	JPanel panel1, panel2, panel3, panel4;
 	JButton orderChicken = new JButton("주문하기");
@@ -27,7 +27,7 @@ public class Lunch extends JFrame{
 			String selectedItem = e.getActionCommand();
 			
 			switch(selectedItem) {
-			case "닫기":
+			case "종료":
 				System.exit(0);
 				return;
 				
@@ -36,10 +36,22 @@ public class Lunch extends JFrame{
 				String calcPath = calc.getAbsolutePath();
 				try {
 					Process calProcess = new ProcessBuilder(calcPath).start();
-					BufferedReader stdOut = new BufferedReader(new InputStreamReader(calProcess.getInputStream()));
 				} catch(IOException er) {
 					System.out.println("계산기가 안켜진다");
 				}
+				return;
+				
+			case "제보하기":
+				//제보 기능 구현
+				return;
+			
+			case "프로그램 버전":
+				JOptionPane.showMessageDialog(null, "0.1b ver. On Progress Project 'lunch'", "Program Version", JOptionPane.PLAIN_MESSAGE);
+				return;
+			case "개발자 정보":
+				JOptionPane.showMessageDialog(null, "Developer: RafesiA(조경진)\n" + "Undergraduate at Kyonggi Univ.\n" + 
+			"Contact: infectionweapon@gmail.com\n" + "whrudwls98@naver.com\n" + "https://github.com/RafesiA",
+			"Developer Information", JOptionPane.PLAIN_MESSAGE, icon);
 			}
 		}
 	}
@@ -194,15 +206,18 @@ public class Lunch extends JFrame{
 					return;
 				}
 			}
-			
 		}
 	}
 	
 	public void creatingMenu() {
 		JMenu firstMenu = new JMenu("파일");
+		JMenu secondMenu = new JMenu("기타");
 		JMenuBar menuBar = new JMenuBar();
-		String[] menuItemName = {"닫기", "계산기", "종료", "제보하기"};
-		JMenuItem[] menuItem = new JMenuItem[5];
+		String[] menuItemName = {"계산기", "제보하기", "종료"};
+		String[] infoItemName = {"프로그램 버전", "개발자 정보", "문의하기"};
+		
+		JMenuItem[] menuItem = new JMenuItem[3];
+		JMenuItem[] infoItem = new JMenuItem[3];
 		MenuListener il = new MenuListener();
 		
 		for(int i=0;i<menuItemName.length; i++) {
@@ -210,7 +225,13 @@ public class Lunch extends JFrame{
 			menuItem[i].addActionListener(il);
 			firstMenu.add(menuItem[i]);
 		}
+		for(int i=0;i<infoItemName.length; i++) {
+			infoItem[i] = new JMenuItem(infoItemName[i]);
+			infoItem[i].addActionListener(il);
+			secondMenu.add(infoItem[i]);
+		}
 		menuBar.add(firstMenu);
+		menuBar.add(secondMenu);
 		frm.setJMenuBar(menuBar);
 		
 	}
