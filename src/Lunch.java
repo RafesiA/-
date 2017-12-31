@@ -154,15 +154,19 @@ public class Lunch extends JFrame{
 			else if(menuName.equals("선택하세요")) {
 				if(resName[0] == menuName) {
 					outputArea1.setText("");
+					return;
 				}
 				else if(resName1[0] == menuName) {
 					outputArea2.setText("");
+					return;
 				}
 				else if(resName2[0] == menuName) {
 					outputArea3.setText("");
+					return;
 				}
 				else if(resName3[0] == menuName) {
 					outputArea4.setText("");
+					return;
 				}
 			}
 		}
@@ -182,7 +186,7 @@ public class Lunch extends JFrame{
 		}
 		
 		menuBar.add(firstMenu);
-		setJMenuBar(menuBar);
+		frm.setJMenuBar(menuBar);
 		
 	}
 	
@@ -252,24 +256,20 @@ public class Lunch extends JFrame{
 		jtp.add("피자", panel2);
 		jtp.add("족발/보쌈", panel3);
 		jtp.add("중식", panel4);
-		jtp.add("+", null);
 		
 	}
 	
 	public Lunch() {
 		userUI();
+		creatingMenu();
 		frm.add(jtp);
 		frm.setTitle("점심먹자");
 		frm.setSize(1000,500);
 		frm.setVisible(true);
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frm.setLayout(new BorderLayout());
+		frm.setResizable(false);
 		}
 	
-	
-	
-	
-
 
 	public static void main(String[] args) {
 		new Lunch();
