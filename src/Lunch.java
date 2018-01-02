@@ -5,22 +5,30 @@ import java.io.*;
 import java.util.*;
 
 public class Lunch extends JFrame{
-	String fileName;
 	File resListFile = new File("src\\Menus\\");
+	String fileName;
 	String filePath = resListFile.getPath();
+	String[] resName = {"선택하세요", "순살파닭", "BHC", "신통치킨", "미쳐버린파닭", "팔구치킨"};
+	String[] resName1 = {"선택하세요", "피자에땅", "피자알볼로", "59쌀피자", "피자헤븐", "토파토피자"};
+	String[] resName2 = {"선택하세요", "족발뱅이", "사또족발"};
+	String[] resName3 = {"선택하세요", "만다린", "라이징강", "짬뽕이조아", "궁차이나"};
+	private static final String[] report = {"이 음식점은 이제 배달을 안해요", "이 음식점이 신장개업했어요", "아무도 몰랐던 음식점을 제보해요", "푸드 매거진에 광고하고싶어요(사장님들만!)"};
+	
+	
+	JPanel multipleInput;
 	JFrame frm = new JFrame();
 	JTabbedPane jtp = new JTabbedPane();
-	ImageIcon icon = new ImageIcon("src\\myImage.jpg");
 	JTextArea outputArea1, outputArea2, outputArea3, outputArea4;
+	JLabel reportResName = new JLabel("음식점 이름:");
+	JLabel reportResCall = new JLabel("음식점 번호:");
+	JTextField reportInputName = new JTextField(10);
+	JTextField reportInputCall = new JTextField(10);
 	JPanel panel1, panel2, panel3, panel4;
 	JButton orderChicken = new JButton("주문하기");
 	JButton orderPizza = new JButton("주문하기");
 	JButton orderFoot = new JButton("주문하기");
 	JButton orderChienese = new JButton("주문하기");
-	String[] resName = {"선택하세요", "순살파닭", "BHC", "신통치킨", "미쳐버린파닭", "팔구치킨"};
-	String[] resName1 = {"선택하세요", "피자에땅", "피자알볼로", "59쌀피자", "피자헤븐", "토파토피자"};
-	String[] resName2 = {"선택하세요", "족발뱅이", "사또족발"};
-	String[] resName3 = {"선택하세요", "만다린", "라이징강", "짬뽕이조아", "궁차이나"};
+	ImageIcon icon = new ImageIcon("src\\myImage.jpg");
 	
 	class MenuListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
@@ -42,8 +50,53 @@ public class Lunch extends JFrame{
 				return;
 				
 			case "제보하기":
-				//제보 기능 구현
+				String reporting = (String)JOptionPane.showInputDialog(null, "캠퍼스 푸드매거진에 제보할 것이 있나요?", "Reporting Restaurant",
+			JOptionPane.YES_OPTION, null, report, null);
+				
+				multipleInput = new JPanel();
+				GroupLayout layout = new GroupLayout(multipleInput);
+				layout.setAutoCreateContainerGaps(true);
+				layout.setAutoCreateGaps(true);
+				
+				layout.setHorizontalGroup(layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(reportResName)
+								.addComponent(reportResCall))
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(reportInputName)
+								.addComponent(reportInputCall)
+								));
+				
+				layout.setVerticalGroup(layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(reportResName)
+								.addComponent(reportInputName))
+						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(reportResCall)
+								.addComponent(reportInputCall)
+								));
+				
+				
+				multipleInput.setLayout(layout);
+				
+				if(reporting.equals(report[0])) {
+					JOptionPane.showInputDialog(null, "Input Restaurnt Name", "IRS", JOptionPane.YES_OPTION);
+				}
+				else if(reporting.equals(report[1])) {
+					JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
+					String getInputResName = reportInputName.getText();
+					System.out.println(getInputResName);
+					
+				}
+				else if(reporting.equals(report[2])) {
+					JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
+				}
+				else if(reporting.equals(report[3])) {
+					JOptionPane.showMessageDialog(null, "광고 문의 번호 010-2316-0090입니다.", "광고 문의", JOptionPane.DEFAULT_OPTION);
+				}
+				
 				return;
+				//제보 기능 구현
 			
 			case "프로그램 버전":
 				JOptionPane.showMessageDialog(null, "0.1b ver. On Progress Project 'lunch'", "Program Version", JOptionPane.PLAIN_MESSAGE);
@@ -53,6 +106,11 @@ public class Lunch extends JFrame{
 			"Contact: infectionweapon@gmail.com\n" + "whrudwls98@naver.com\n" + "https://github.com/RafesiA",
 			"Developer Information", JOptionPane.PLAIN_MESSAGE, icon);
 			}
+		}
+	}
+	class ButtonListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			// Ordering Button
 		}
 	}
 	
@@ -303,7 +361,7 @@ public class Lunch extends JFrame{
 		userUI();
 		creatingMenu();
 		frm.add(jtp);
-		frm.setTitle("점심먹자");
+		frm.setTitle("KGU 푸드매거진");
 		frm.setSize(500,320);
 		frm.setVisible(true);
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
