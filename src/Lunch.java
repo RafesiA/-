@@ -13,8 +13,8 @@ public class Lunch extends JFrame{
 	String[] resName2 = {"선택하세요", "족발뱅이", "사또족발"};
 	String[] resName3 = {"선택하세요", "만다린", "라이징강", "짬뽕이조아", "궁차이나"};
 	private static final String[] report = {"이 음식점은 이제 배달을 안해요", "이 음식점이 신장개업했어요", "아무도 몰랐던 음식점을 제보해요", "푸드 매거진에 광고하고싶어요(사장님들만!)"};
-	
-	
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	File sendResReport = new File("C:\\Temp\\SendReport.txt");
 	JPanel multipleInput;
 	JFrame frm = new JFrame();
 	JTabbedPane jtp = new JTabbedPane();
@@ -29,6 +29,29 @@ public class Lunch extends JFrame{
 	JButton orderFoot = new JButton("주문하기");
 	JButton orderChienese = new JButton("주문하기");
 	ImageIcon icon = new ImageIcon("src\\myImage.jpg");
+	
+	void resReport() {
+		int sendReport = JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
+		if(sendReport == JOptionPane.YES_OPTION) {
+		int getInputCall = Integer.parseInt(reportInputCall.getText());
+		String getInputResName = reportInputName.getText();
+		try {
+			FileWriter fw = new FileWriter(sendResReport);
+			fw.write(getInputResName + LINE_SEPARATOR + getInputCall);
+			fw.flush();
+			fw.close();
+		} catch(IOException e) {
+			System.out.println("FileWriting error");
+		}
+		reportInputName.setText("");
+		reportInputCall.setText("");
+		}
+		else {
+			return;
+		}
+	}
+	
+	
 	
 	class MenuListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
@@ -80,16 +103,14 @@ public class Lunch extends JFrame{
 				multipleInput.setLayout(layout);
 				
 				if(reporting.equals(report[0])) {
-					JOptionPane.showInputDialog(null, "Input Restaurnt Name", "IRS", JOptionPane.YES_OPTION);
+					String getResName = JOptionPane.showInputDialog(null, "Input Restaurnt Name", "IRS", JOptionPane.YES_OPTION);
+					System.out.println(getResName);
 				}
 				else if(reporting.equals(report[1])) {
-					JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
-					String getInputResName = reportInputName.getText();
-					System.out.println(getInputResName);
-					
+					resReport();
 				}
 				else if(reporting.equals(report[2])) {
-					JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
+					resReport();
 				}
 				else if(reporting.equals(report[3])) {
 					JOptionPane.showMessageDialog(null, "광고 문의 번호 010-2316-0090입니다.", "광고 문의", JOptionPane.DEFAULT_OPTION);
