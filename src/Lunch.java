@@ -29,6 +29,7 @@ public class Lunch extends JFrame{
 	JButton orderFoot = new JButton("주문하기");
 	JButton orderChienese = new JButton("주문하기");
 	ImageIcon icon = new ImageIcon("src\\myImage.jpg");
+	JComboBox<String> box1, box2, box3, box4;
 	
 	void resReport() {
 		int sendReport = JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
@@ -40,6 +41,7 @@ public class Lunch extends JFrame{
 			fw.write(getInputResName + LINE_SEPARATOR + getInputCall);
 			fw.flush();
 			fw.close();
+			// 개발자 이메일에 전송하는 코드 구현 에정
 		} catch(IOException e) {
 			System.out.println("FileWriting error");
 		}
@@ -131,6 +133,14 @@ public class Lunch extends JFrame{
 	}
 	class ButtonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
+			JButton b = (JButton)e.getSource();
+			if(b.getText().equals("주문하기")) {
+				if(box1.getSelectedItem().equals(resName[1])) {
+					Order openOrderWindow = new Order();
+					openOrderWindow.setVisible(true);
+				}
+			}
+			
 			// Ordering Button
 		}
 	}
@@ -316,6 +326,7 @@ public class Lunch extends JFrame{
 	}
 	
 	void userUI() {
+		ButtonListener bt = new ButtonListener();
 		MyActionListener listener = new MyActionListener();
 		outputArea1 = new JTextArea(10, 30);
 		outputArea2 = new JTextArea(10, 30);
@@ -326,10 +337,10 @@ public class Lunch extends JFrame{
 		outputArea3.setEditable(false);
 		outputArea4.setEditable(false);
 		
-		JComboBox<String> box1 = new JComboBox<String>(resName);
-		JComboBox<String> box2 = new JComboBox<String>(resName1);
-		JComboBox<String> box3 = new JComboBox<String>(resName2);
-		JComboBox<String> box4 = new JComboBox<String>(resName3);
+		box1 = new JComboBox<String>(resName);
+		box2 = new JComboBox<String>(resName1);
+		box3 = new JComboBox<String>(resName2);
+		box4 = new JComboBox<String>(resName3);
 		box1.addActionListener(listener);
 		box2.addActionListener(listener);
 		box3.addActionListener(listener);
@@ -343,6 +354,7 @@ public class Lunch extends JFrame{
 		panel1.setBackground(Color.gray);
 		panel1.add(box1);
 		panel1.add(outputArea1);
+		orderChicken.addActionListener(bt);
 		panel1.add(orderChicken);
 		panel1.add(new JScrollPane(outputArea1));
 		panel1.setFocusable(true);
@@ -351,6 +363,7 @@ public class Lunch extends JFrame{
 		panel2.setBackground(Color.gray);
 		panel2.add(box2);
 		panel2.add(outputArea2);
+		orderPizza.addActionListener(bt);
 		panel2.add(orderPizza);
 		panel2.add(new JScrollPane(outputArea2));
 		panel2.setFocusable(true);
@@ -359,6 +372,7 @@ public class Lunch extends JFrame{
 		panel3.setBackground(Color.gray);
 		panel3.add(box3);
 		panel3.add(outputArea3);
+		orderFoot.addActionListener(bt);
 		panel3.add(orderFoot);
 		panel3.add(new JScrollPane(outputArea3));
 		panel3.setFocusable(true);
@@ -367,6 +381,7 @@ public class Lunch extends JFrame{
 		panel4.setBackground(Color.gray);
 		panel4.add(box4);
 		panel4.add(outputArea4);
+		orderChienese.addActionListener(bt);
 		panel4.add(orderChienese);
 		panel4.add(new JScrollPane(outputArea4));
 		panel4.setFocusable(true);
