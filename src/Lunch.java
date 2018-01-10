@@ -34,19 +34,21 @@ public class Lunch extends JFrame{
 	void resReport() {
 		int sendReport = JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
 		if(sendReport == JOptionPane.YES_OPTION) {
-		int getInputCall = Integer.parseInt(reportInputCall.getText());
-		String getInputResName = reportInputName.getText();
-		try {
-			FileWriter fw = new FileWriter(sendResReport);
-			fw.write(getInputResName + LINE_SEPARATOR + getInputCall);
-			fw.flush();
-			fw.close();
-			// 개발자 이메일에 전송하는 코드 구현 에정
-		} catch(IOException e) {
-			System.out.println("FileWriting error");
-		}
-		reportInputName.setText("");
-		reportInputCall.setText("");
+			String getInputCall = reportInputCall.getText();
+			String getInputResName = reportInputName.getText();
+			try {
+				FileWriter fw = new FileWriter(sendResReport);
+				fw.write(getInputResName + LINE_SEPARATOR + getInputCall);
+				fw.flush();
+				fw.close();
+				JOptionPane.showMessageDialog(null, "제보해주셔서 감사합니다", "Thanks you", JOptionPane.NO_OPTION);
+				// 개발자 이메일에 전송하는 코드 구현 에정
+			} catch(IOException e) {
+				System.out.println("FileWriting error");
+			}
+			reportInputName.setText("");
+			reportInputCall.setText("");
+			return;
 		}
 		else {
 			return;
@@ -75,9 +77,6 @@ public class Lunch extends JFrame{
 				return;
 				
 			case "제보하기":
-				String reporting = (String)JOptionPane.showInputDialog(null, "캠퍼스 푸드매거진에 제보할 것이 있나요?", "Reporting Restaurant",
-			JOptionPane.YES_OPTION, null, report, null);
-				
 				multipleInput = new JPanel();
 				GroupLayout layout = new GroupLayout(multipleInput);
 				layout.setAutoCreateContainerGaps(true);
@@ -102,8 +101,9 @@ public class Lunch extends JFrame{
 								));
 				
 				
+				String reporting = (String)JOptionPane.showInputDialog(null, "캠퍼스 푸드매거진에 제보할 것이 있나요?", "Reporting Restaurant",
+			JOptionPane.NO_OPTION, null, report, null);
 				multipleInput.setLayout(layout);
-				
 				if(reporting.equals(report[0])) {
 					String getResName = JOptionPane.showInputDialog(null, "Input Restaurnt Name", "IRS", JOptionPane.YES_OPTION);
 					System.out.println(getResName);
@@ -116,6 +116,9 @@ public class Lunch extends JFrame{
 				}
 				else if(reporting.equals(report[3])) {
 					JOptionPane.showMessageDialog(null, "광고 문의 번호 010-2316-0090입니다.", "광고 문의", JOptionPane.DEFAULT_OPTION);
+				}
+				else {
+					return;
 				}
 				
 				return;
