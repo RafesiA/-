@@ -30,6 +30,8 @@ public class Lunch extends JFrame{
 	JButton orderChienese = new JButton("주문하기");
 	ImageIcon icon = new ImageIcon("src\\myImage.jpg");
 	JComboBox<String> box1, box2, box3, box4;
+	JList list1, list2, list3, list4;
+	
 	
 	void resReport() {
 		int sendReport = JOptionPane.showConfirmDialog(null, multipleInput, null, JOptionPane.YES_OPTION);
@@ -141,6 +143,10 @@ public class Lunch extends JFrame{
 				if(box1.getSelectedItem().equals(resName[1])) {
 					Order openOrderWindow = new Order();
 					openOrderWindow.setVisible(true);
+					return;
+				}
+				else if(box1.getSelectedItem().equals(resName[2])) {
+					
 				}
 			}
 			
