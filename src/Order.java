@@ -10,11 +10,13 @@ public class Order extends JFrame {
 	JTextField sum = new JTextField(8);
 		
 	public Order() {
-		GridLayout grid = new GridLayout(4, 2);
-		grid.setVgap(10);
-		setLayout(grid);
-		lunchName.setLayout(null);
-		lunchName.setLocation(200, 0);
+		BoxLayout box = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
+		setLayout(box);
+		lunchName.setAlignmentX((float) 0.5);
+		buttonItem1.setAlignmentX((float)0.5);
+		buttonItem2.setAlignmentX((float)0.5);
+		buttonItem3.setAlignmentX((float)0.5);
+		buttonItem4.setAlignmentX((float)0.5);
 		add(lunchName);
 		add(buttonItem1);
 		add(buttonItem2);
